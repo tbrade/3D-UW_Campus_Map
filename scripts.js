@@ -1,0 +1,101 @@
+mapboxgl.accessToken = 'pk.eyJ1IjoidGJyYWRlIiwiYSI6ImNsMW1pMjMyNTAxY2szZ3FvcHhod2JsYzcifQ.F24Fhc3tQSsHf6hqPpmp2Q'
+const map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/tbrade/ckvszdpf21ajp14u7r5k6syj4',
+center: [-122.43980, 47.24354],
+zoom: 17, // starting zoom
+pitch: 72,
+bearing: 0,
+});
+
+map.on('load', () => {
+//   map.addSource('trails', {
+//     type: 'geojson',
+//     data: 'data/Big_Bend_National_Park_-_Trails.geojson'
+//   });
+//
+//   map.addLayer({
+//     'id': 'trails-layer',
+//     'type': 'line',
+//     'source': 'trails',
+//     'paint': {
+//         'line-width': 3,
+//         'line-color': ['match', ['get', 'TRLCLASS'],
+//             'Class 1: Minimally Developed', 'red',
+//             'Class 2: Moderately Developed', 'orange',
+//             'Class 3: Developed', 'yellow',
+//             /*else,*/ 'blue'
+//         ]
+//     }
+//   });
+
+  // map.on('click', 'trails-layer', (e) => {
+  //   const coordinates = e.lngLat;
+  //     let feature = e.features[0].properties
+  //   const description = "<b>Trail name:</b> " + feature.TRLNAME + "<br><b>Trail class:</b> " + feature.TRLCLASS + "<br><b>Trail length:</b> " + feature.Miles.toFixed(2) + " miles";
+  //
+  //     new mapboxgl.Popup()
+  //       .setLngLat(coordinates)
+  //       .setHTML(description)
+  //       .addTo(map);
+  // });
+
+  // map.on('mouseenter', 'trails-layer', () => {
+  //     map.getCanvas().style.cursor = 'pointer';
+  // });
+  //
+  // map.on('mouseleave', 'trails-layer', () => {
+  //   map.getCanvas().style.cursor = '';
+  // });
+  //
+  // map.addSource('bounds', {
+  //   type: 'geojson',
+  //   data: 'data/bibe_boundary_WGS_1984.geojson'
+  // });
+  //
+  // map.addLayer({
+  //   'id': 'boundary-layer',
+  //   'type': 'line',
+  //   'source': 'bounds',
+  //   'paint': {
+  //     'line-width': 4,
+  //     'line-color': 'black',
+  //     'line-opacity': .6
+  //   }
+  // });
+
+
+  // map.addSource('mapbox-dem', {
+  //     "type": "raster-dem",
+  //     "url": "mapbox://mapbox.mapbox-terrain-dem-v1",
+  //     'tileSize': 512,
+  //     'maxzoom': 14
+  // });
+
+  // map.setTerrain({'source': 'mapbox-dem', 'exaggeration': 1.25});
+
+  map.addLayer({
+          'id': 'sky',
+          'type': 'sky',
+          'paint': {
+              'sky-type': 'atmosphere',
+              'sky-atmosphere-sun': [0.0, 0.0],
+              'sky-atmosphere-sun-intensity': 5
+          }
+  });
+
+ });
+
+const navControl = new mapboxgl.NavigationControl({
+  visualizePitch: true
+});
+map.addControl(navControl, 'top-right');
+
+const scale = new mapboxgl.ScaleControl({
+  maxWidth: 80,
+  unit: 'imperial',
+});
+
+map.addControl(scale, 'bottom-left');
+
+scale.setUnit('imperial');
